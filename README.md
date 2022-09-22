@@ -2,7 +2,7 @@
 
 [![npm version](https://img.shields.io/npm/v/@ouroboros/events.svg)](https://www.npmjs.com/package/@ouroboros/events) ![MIT License](https://img.shields.io/npm/l/@ouroboros/events.svg)
 
-A library to give the ability to subscribe to and trigger synchronous events in javascript. Useful for passing data around a project without creating import conflicts.
+A library to give the ability to subscribe to and trigger synchronous events in javascript. Useful for passing data around a project without creating import conflicts / circular dependencies.
 
 ## Installation
 npm
@@ -18,40 +18,36 @@ Import events into your code
 import events from '@ouroboros/events';
 ```
 
-Subscribing and unsubscribing in an React effect
+Subscribing and unsubscribing in a React useEffect hook:
 
 ```javascript
 export default function App() {
+    useEffect(() => {
+        const headerClick = (element) => {alert(`Header ${element} element was clicked!`)}
+        events.subscribe('header', headerClick);
+        return () => {
+            events.unsubscribe('header', headerClick');
+        }
+    }, []);
 
-	useEffect(() => {
-
-		const headerClick = (element) => {alert(`Header ${element} element was clicked!`)}
-		events.subscribe('header', headerClick);
-
-		return () => {
-			events.unsubscribe('header', headerClick');
-		}
-
-	}, []);
-
-	return (
-		<Header />
-	)
+    return (
+        <Header />
+    )
 }
 ```
 
-Triggering an event from another component
+Triggering an event from another component:
 
 ```javascript
 export default function Header(props) {
-	return (
-		<div onClick={() => {
-			events.trigger('header', 'div');
-		}}>
-			<p onClick={() => {
-				events.trigger('header', 'p');
-			}}>Header Content</p>
-		</div>
-	);
+    return (
+        <div onClick={() => {
+            events.trigger('header', 'div');
+        }}>
+            <p onClick={() => {
+                events.trigger('header', 'p');
+            }}>Header Content</p>
+        </div>
+    );
 }
 ```
