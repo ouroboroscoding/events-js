@@ -88,5 +88,5 @@ function unsubscribe(event, callback) {
     return false;
 }
 // Default export
-const Events = { subscribe, trigger, unsubscribe };
-export default Events;
+const events = { subscribe, trigger, unsubscribe };
+export default events;
