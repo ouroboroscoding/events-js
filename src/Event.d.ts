@@ -1,14 +1,14 @@
 /**
  * Event
  *
- * Singl event model
+ * Single event model
  *
  * @author Chris Nasr <chris@ouroboroscoding.com>
  * @copyright Ouroboros Coding Inc.
  * @created 2023-03-1
  */
-export declare type EventCallback = (...args: any[]) => {};
-export declare type EventReturn = {
+export type EventCallback = (...args: any[]) => {};
+export type EventReturn = {
     unsubscribe: () => boolean;
 };
 /**

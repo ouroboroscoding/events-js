@@ -1,7 +1,7 @@
 /**
  * Event
  *
- * Singl event model
+ * Single event model
  *
  * @author Chris Nasr <chris@ouroboroscoding.com>
  * @copyright Ouroboros Coding Inc.
