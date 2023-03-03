@@ -75,7 +75,7 @@ export default class Event {
     /**
      * Unsubscribe
      *
-     * Not meant to be called publically, but kept as such in order to support
+     * Not meant to be called publicaly, but kept as such in order to support
      * code using old style subscrube/unsubscribe methods. Searches for the
      * callback and then removes it from the list if found.
      *
