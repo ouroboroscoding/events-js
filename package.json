@@ -1,12 +1,12 @@
 {
 	"name": "@ouroboros/events",
-	"version": "0.1.0",
+	"version": "1.0.0",
 	"description": "Package to give the ability to subscribe to and trigger synchronous events in javascript. Useful for passing data around a project without creating import conflicts.",
-	"main": "index.js",
-	"types": "index.d.ts",
+	"main": "src/index.js",
+	"types": "src/index.d.ts",
 	"scripts": {
 		"build": "tslint -p tsconfig.json && tsc",
-		"clean": "rm index.js index.d.ts",
+		"clean": "rm src/*.js src/*.d.ts",
 		"test": "echo \"Error: no test specified.\" && exit 1"
 	},
 	"repository": {
