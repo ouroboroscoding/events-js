@@ -9,7 +9,7 @@
  */
 
 // Callback type
-export type EventCallback = (...args: any[]) => {};
+export type EventCallback = (...args: any[]) => void;
 
 // Return type
 export type EventReturn = {

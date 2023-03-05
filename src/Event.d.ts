@@ -7,7 +7,7 @@
  * @copyright Ouroboros Coding Inc.
  * @created 2023-03-1
  */
-export type EventCallback = (...args: any[]) => {};
+export type EventCallback = (...args: any[]) => void;
 export type EventReturn = {
     unsubscribe: () => boolean;
 };
