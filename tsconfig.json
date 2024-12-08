@@ -2,15 +2,17 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
+		"baseUrl": "src",
 		"declaration": true,
 		"esModuleInterop": true,
 		"isolatedModules": true,
 		"lib": ["es2017"],
 		"moduleResolution": "node",
 		"noEmit": false,
+		"outDir": "build",
 		"strict": true,
 		"target": "esnext"
 	},
-	"include": ["./"],
+	"include": ["./src"],
 	"exclude": []
 }
