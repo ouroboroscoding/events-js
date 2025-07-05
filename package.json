@@ -1,6 +1,6 @@
 {
 	"name": "@ouroboros/events",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Package to give the ability to subscribe to and trigger synchronous events in javascript. Useful for passing data around a project without creating import conflicts.",
 	"main": "build/index.js",
 	"types": "build/index.d.ts",
