@@ -2,14 +2,14 @@
 	"compilerOptions": {
 		"allowJs": true,
 		"allowSyntheticDefaultImports": true,
-		"baseUrl": "src",
 		"declaration": true,
 		"esModuleInterop": true,
 		"isolatedModules": true,
-		"lib": ["es2017"],
-		"moduleResolution": "node",
+		"lib": ["es2020", "dom", "dom.iterable"],
+		"module": "ESNext",
+		"moduleResolution": "bundler",
 		"noEmit": false,
-		"outDir": "build",
+		"outDir": "lib",
 		"strict": true,
 		"target": "esnext"
 	},

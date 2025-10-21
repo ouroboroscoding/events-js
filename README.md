@@ -43,14 +43,19 @@ return an object with an unsubscribe function, making the following effectively
 the same as above.
 
 ```jsx
+function ElementClick({ }) {
+  const [ element, setElement ] = useState(false);
   useEffect(() => {
-    const e = events.get('header').subscribe((element) => {
-        alert(`Header ${element} element was clicked!`)
-    });
+    const e = events.get('header').subscribe(setElement);
     return () => {
       e.unsubscribe();
     }
   }, []);
+  if(!element) {
+    return null;
+  }
+  return <span>Header {element} element was clicked!</span>
+}
 ```
 
 Triggering an event from another component:
@@ -67,6 +72,23 @@ export default function Header(props) {
     </div>
   );
 }
+```
+
+## Immediate triggers
+If you ever run into the issue of triggers being fired off before your component
+is able to subscribe, you can use `lastArgs`, the last set of arguments to
+trigger, via the return from `subscribe`.
+
+```jsx
+  useEffect(() => {
+    const e = events.get('header').subscribe(setElement);
+    if(e.lastArgs !== null) {
+      setElement(e.lastArgs[0]);
+    }
+    return () => {
+      e.unsubscribe();
+    }
+  }, []);
 ```
 
 ## Triggering
@@ -87,7 +109,7 @@ export default function Header(props) {
         events.get('header').trigger('p', 'div');
       }}>
         <b onClick={() => {
-            events.get('header').trigger('b', 'p', 'div');
+          events.get('header').trigger('b', 'p', 'div');
         }}>Header Content</b>
       </p>
     </div>
@@ -102,11 +124,11 @@ the parent:
 ```jsx
   useEffect(() => {
     const e = events.get('header').subscribe((element, parent) => {
-        if(parent) {
-          alert(`Header ${element} of ${parent} was clicked!`)
-        } else {
-          alert(`Header ${element} element was clicked!`)
-        }
+      if(parent) {
+        alert(`Header ${element} of ${parent} was clicked!`)
+      } else {
+        alert(`Header ${element} element was clicked!`)
+      }
     });
     return () => {
       e.unsubscribe();
@@ -119,11 +141,12 @@ the parent:
 ```jsx
   useEffect(() => {
     const e = events.get('header').subscribe(() => {
-        const reverse = arguments.slice().reverse();
-        alert(`Header ${reverse.join(' -> ')} element was clicked!`)
+      const reverse = arguments.slice().reverse();
+      alert(`Header ${reverse.join(' -> ')} element was clicked!`)
     });
     return () => {
       e.unsubscribe();
     }
   }, []);
 ```
+

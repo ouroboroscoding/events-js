@@ -13,6 +13,7 @@ export type EventCallback = (...args: any[]) => void;
 
 // Return type
 export type EventReturn = {
+	lastArgs: any[] | null,
 	unsubscribe: () => boolean
 }
 
@@ -25,6 +26,9 @@ export type EventReturn = {
  * @extends Subscribe
  */
 export default class Event {
+
+	// The last event sent
+	private lastArgs: any[] | null = null;
 
 	// The list of callbacks to notify on changes
 	private subscribers: EventCallback[];
@@ -60,6 +64,9 @@ export default class Event {
 			args = varArgs;
 		}
 
+		// Store it for anyone who subscribes in the future
+		this.lastArgs = args;
+
 		// Notify the subscribers
 		for(const f of this.subscribers) {
 			f.apply(null, args);
@@ -75,7 +82,7 @@ export default class Event {
 	 * @name subscribe
 	 * @access public
 	 * @param callback The function to call when data changes
-	 * @returns current data
+	 * @returns the last trigger arguments, and an unsubscribe method
 	 */
 	subscribe(callback: EventCallback): EventReturn {
 
@@ -84,6 +91,7 @@ export default class Event {
 
 		// Return the current data as well as a function to unsubscribe
 		return {
+			lastArgs: this.lastArgs,
 			unsubscribe: () => {
 				return this.unsubscribe(callback);
 			}
