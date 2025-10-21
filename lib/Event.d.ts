@@ -9,6 +9,7 @@
  */
 export type EventCallback = (...args: any[]) => void;
 export type EventReturn = {
+    lastArgs: any[] | null;
     unsubscribe: () => boolean;
 };
 /**
@@ -20,6 +21,7 @@ export type EventReturn = {
  * @extends Subscribe
  */
 export default class Event {
+    private lastArgs;
     private subscribers;
     /**
      * Constructor
@@ -50,7 +52,7 @@ export default class Event {
      * @name subscribe
      * @access public
      * @param callback The function to call when data changes
-     * @returns current data
+     * @returns the last trigger arguments, and an unsubscribe method
      */
     subscribe(callback: EventCallback): EventReturn;
     /**
