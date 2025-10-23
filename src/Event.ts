@@ -67,10 +67,15 @@ export default class Event {
 		// Store it for anyone who subscribes in the future
 		this.lastArgs = args;
 
-		// Notify the subscribers
-		for(const f of this.subscribers) {
-			f.apply(null, args);
-		}
+		// Add an empty timer to add the events to the end of the event loop
+		setTimeout(() => {
+
+			// Notify the subscribers
+			for(const f of this.subscribers) {
+				f.apply(null, args);
+			}
+
+		}, 0);
 	}
 
 	/**
