@@ -1,5 +1,11 @@
 # @ouroboros/events releases
 
+## 1.1.3
+- Switched from calling subscribers immediately upon trigger, to firing off at the end of the javascript event loop.
+
+## 1.1.2
+- `EventReturn` from `subscribe()` now contains `lastArgs` which might be undefined if no trigger has been called yet.
+
 ## 1.1.1
 - Updated documentation to match changes in 1.0.0 and provide more examples.
 
